@@ -48,6 +48,6 @@ module.exports = {
             return { err: "Prato não encontrado" }
         }
 
-        return { msg: "Prato deletado!" }
+        return { msg : "Prato deletado!" }
     }
 }

@@ -65,7 +65,7 @@ module.exports = {
                 return Response.status(200).json({ err : del.err});
             }
 
-            return Response.status(200).json(del.msg);
+            return Response.status(200).json({ msg : del.msg});
 
         } catch (error) {
             
