@@ -14,5 +14,10 @@ module.exports = {
         }
 
         return Response.status(200).json(menu)
+    },
+
+    create_Account: async (Request, Response) => {
+
+        const { name } = Request.body;
     }
 }

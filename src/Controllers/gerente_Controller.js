@@ -1,8 +1,16 @@
+const clientes_Service = require("../service/clientes_Service");
 const menu_Service = require("../service/menu_Service");
 
 
 module.exports = { 
 
+    list_Clientes_Cadastrados: async(Request, Response) => {
+
+        const clients = await clientes_Service.list_Cliente_Service();
+
+
+        return Response.status(200).json(clients);
+    },
 
     create_Pratos_Menu: async(Request, Response) => {
 
@@ -10,7 +18,7 @@ module.exports = {
             
             const { name, description, price } = Request.body;
 
-            const create = await menu_Service.create_Prato_Menu(name, description, price);
+            const create = await menu_Service.create_Prato_Menu_Service(name, description, price);
 
 
             if(create.err){
@@ -36,7 +44,7 @@ module.exports = {
             const { name, description, price } = Request.body;
 
 
-            const update = await menu_Service.update_Prato_Menu(id, name, description, price);
+            const update = await menu_Service.update_Prato_Menu_Service(id, name, description, price);
 
             if(update.err){
 
@@ -58,7 +66,7 @@ module.exports = {
             
             const { id } = Request.params;
 
-            const del = await menu_Service.delete_Prato_Menu(id);
+            const del = await menu_Service.delete_Prato_Menu_Service(id);
 
             if(del.err){
 

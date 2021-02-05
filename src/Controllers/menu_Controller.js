@@ -7,7 +7,7 @@ module.exports = {
 
         try {
             
-            const menu = await menu_Service.get_Menu();
+            const menu = await menu_Service.get_Menu_Service();
 
 
             return Response.status(200).json(menu);
@@ -17,5 +17,7 @@ module.exports = {
             console.log(error);
             return Response.status(500).json({ err: error });
         }
-    } 
+    },
+    
+    
 }
