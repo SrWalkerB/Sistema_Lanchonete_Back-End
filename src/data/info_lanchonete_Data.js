@@ -12,5 +12,11 @@ module.exports = {
             nome_empresarial: name_empresarial,
             descricao: descricao
         })
+    },
+
+    seacher_Lanchonete_ID_DB: async (id_lanchonete) => {
+
+        return db_Actions('tb_info_lanchonete')
+        .where("id_lanchonete", id_lanchonete);
     }
 }

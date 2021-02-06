@@ -29,10 +29,10 @@ module.exports = {
 
         try {
 
-            const { name, surname, email, password } = Request.body;
+            const { name, surname, email, password, id_lanchonete } = Request.body;
 
-            const create_User = await clientes_Service.create_Cliente_Service(name, surname, email, password);
-
+            const create_User = await clientes_Service.create_Cliente_Service(name, surname, email, password, id_lanchonete);
+            
 
             if(create_User.err){
 

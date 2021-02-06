@@ -11,7 +11,7 @@ module.exports = {
         return db_Actions('tb_clientes');
     },
 
-    create_Clients_DB: async(name, surname, email, password, type) => {
+    create_Clients_DB: async(name, surname, email, password, type, id_lanchonete) => {
 
         return db_Actions("tb_clientes").insert({
 
@@ -19,7 +19,8 @@ module.exports = {
             surname: surname,
             email: email,
             password: password,
-            type: type
+            type: type,
+            id_lanchonete: id_lanchonete
         })
     },
 

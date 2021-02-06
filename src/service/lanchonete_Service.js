@@ -10,7 +10,7 @@ module.exports = {
     create_Lanchonete_Service: async (nome_empresarional, descricao, name, surname, email, password) => {
 
         const seacher_mail_client = await clientes_Data.seacher_email_DB(email);
-        const seacher_mail_funcionarios = await funcionaros_Data.seacher_email_Funcionarios(email);
+        const seacher_mail_funcionarios = await funcionaros_Data.seacher_email_Funcionarios_DB(email);
 
 
         if(seacher_mail_funcionarios != "" || seacher_mail_client != ""){
@@ -30,5 +30,10 @@ module.exports = {
         }
 
         return { msg: "Lanchonete criada!" };
+    },
+
+    seacher_Lanchonete_ID_Service: async (id_lanchonete) => {
+
+        return await info_lanchonete_Data.seacher_Lanchonete_ID_DB(id_lanchonete);
     }
 }
