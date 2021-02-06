@@ -6,13 +6,10 @@ exports.up = function(knex) {
     return db_Actions.schema.createTableIfNotExists('tb_funcionarios', table => {
 
         table.integer('id_lanchonete').notNullable();
-        
         table.increments('id_funcionario');
 
         table.string('name', 20).notNullable();
         table.string('surname', 50).notNullable();
-        table.string('email').notNullable();
-        table.string('password').notNullable();
         table.string('type').notNullable();
     })
 };
