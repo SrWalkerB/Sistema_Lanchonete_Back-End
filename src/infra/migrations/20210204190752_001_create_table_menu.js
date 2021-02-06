@@ -6,10 +6,12 @@ exports.up = function(knex) {
   
     return db_Actions.schema.createTableIfNotExists("tb_menu", table => {
 
-        table.increments("id_products");
-        table.string("name");
+        table.integer("id_lanchonete").notNullable();
+
+        table.increments("id_products").notNullable();
+        table.string("name").notNullable();
         table.string("description");
-        table.float("price");
+        table.float("price").notNullable();
     })
 };
 

@@ -7,6 +7,7 @@ exports.up = function(knex) {
     
     return db_Actions.schema.createTableIfNotExists("tb_pedidos", table => {
 
+        table.integer('id_lanchonete').notNullable();
         table.increments("id_pedido").notNullable();
 
         table.integer('id_prato').notNullable()

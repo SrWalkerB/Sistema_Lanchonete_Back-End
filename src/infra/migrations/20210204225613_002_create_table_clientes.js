@@ -11,6 +11,8 @@ exports.up = function(knex) {
         table.string("surname", 50).notNullable();
         table.string("email").notNullable();
         table.string('password').notNullable();
+        table.string("type").notNullable();
+        table.integer("id_lanchonete").notNullable();
     })
 };
 
