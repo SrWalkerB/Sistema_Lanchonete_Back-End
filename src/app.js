@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cliente_route = require("./routes/clientes_route");
 const gerente_route = require("./routes/gerente_route");
