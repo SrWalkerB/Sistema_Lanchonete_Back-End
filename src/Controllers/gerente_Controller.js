@@ -16,9 +16,9 @@ module.exports = {
 
         try {
             
-            const { name, description, price } = Request.body;
+            const { name, description, price, id_lanchonete } = Request.body;
 
-            const create = await menu_Service.create_Prato_Menu_Service(name, description, price);
+            const create = await menu_Service.create_Prato_Menu_Service(name, description, price, id_lanchonete);
 
 
             if(create.err){

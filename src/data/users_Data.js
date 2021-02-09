@@ -20,6 +20,12 @@ module.exports = {
             password: password,
             type: type
         })
+    },
+
+    seacher_User_DB: async (id_user) => {
+
+        return await db_Actions("tb_users")
+        .where("id_user", id_user);
     }
 }
 

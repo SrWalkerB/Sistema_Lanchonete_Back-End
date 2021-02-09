@@ -9,13 +9,14 @@ module.exports = {
         return await db_Actions("tb_menu");
     },
 
-    create_prato_DB: async (name, description, price) => {
+    create_prato_DB: async (name, description, price, id_lanchonete) => {
 
         return await db_Actions("tb_menu").insert({
 
             name: name,
             description: description,
-            price: price
+            price: price,
+            id_lanchonete: id_lanchonete
         })
     },
 
@@ -29,10 +30,11 @@ module.exports = {
         })
     },
 
-    delete_prato_DB: async (id) => {
+    delete_prato_DB: async (id_lanchonete, id_products) => {
 
         return db_Actions("tb_menu")
-        .where("id_products", id)
+        .where("id_lanchonete", id_lanchonete)
+        .where("id_products", id_products)
         .delete();        
     }
 }

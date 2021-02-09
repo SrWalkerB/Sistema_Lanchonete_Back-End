@@ -13,5 +13,17 @@ module.exports = {
     create_User_Service: async (id_user, id_lanchonete, email, password, type) => {
 
         return await users_Data.create_user_DB(id_user, id_lanchonete, email, password, type);
+    },
+
+    seacher_User_Service: async (id_user) => {
+
+        const result = await users_Data.seacher_User_DB(id_user);
+
+        if(result == ""){
+
+            return { err: "Usuário não encontrado" };
+        }
+
+        return result;
     }
 }
