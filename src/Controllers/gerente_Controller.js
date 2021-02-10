@@ -46,11 +46,17 @@ module.exports = {
 
         try {
             
-            const { id } = Request.params;
+            //Pegando os dados o usuario
+            const token = Request.header("Token");
+            const data_Token = verificaToken(token);
+            const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
+            const user_ID_lanchonete = user_Data[0].id_lanchonete;
+
+            //Pegando os Dados do body
+            const { id_product } = Request.params;
             const { name, description, price } = Request.body;
 
-
-            const update = await menu_Service.update_Prato_Menu_Service(id, name, description, price);
+            const update = await menu_Service.update_Prato_Menu_Service(user_ID_lanchonete, id_product, name, description, price);
 
             if(update.err){
 

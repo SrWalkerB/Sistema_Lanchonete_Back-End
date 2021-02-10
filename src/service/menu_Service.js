@@ -27,9 +27,9 @@ module.exports = {
         return { msg: "Prato Criado!" }
     },
 
-    update_Prato_Menu_Service: async(id, name, description, price) => {
+    update_Prato_Menu_Service: async(id_lanchonete, id_product, name, description, price) => {
 
-        const update = await menu_Data.update_prato_DB(id, name, description, price);
+        const update = await menu_Data.update_prato_DB(id_lanchonete, id_product, name, description, price);
 
         if(update <= 0){
 

@@ -20,10 +20,11 @@ module.exports = {
         })
     },
 
-    update_prato_DB: async(id, name, description, price) => {
+    update_prato_DB: async(id_lanchonete, id_product, name, description, price) => {
 
-        return db_Actions('tb_menu').where("id_products", id).update({
-
+        return db_Actions('tb_menu')
+        .where("id_lanchonete", id_lanchonete)
+        .where("id_products", id_product).update({
             name: name,
             description: description,
             price: price
