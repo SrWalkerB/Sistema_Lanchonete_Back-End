@@ -1,5 +1,7 @@
 const clientes_Service = require("../service/clientes_Service");
 const menu_Service = require("../service/menu_Service");
+const users_Service = require("../service/users_Service");
+const { verificaToken } = require("../utils/gerenciarToken");
 
 
 module.exports = { 
@@ -15,17 +17,21 @@ module.exports = {
     create_Pratos_Menu: async(Request, Response) => {
 
         try {
-            
-            const { name, description, price, id_lanchonete } = Request.body;
 
-            const create = await menu_Service.create_Prato_Menu_Service(name, description, price, id_lanchonete);
+            const token = Request.header("Token");
+            const data_Token = verificaToken(token);
 
+            const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
+            const user_ID_lanchonete = user_Data[0].id_lanchonete;
+    
+            const { name, description, price } = Request.body;
+            const create = await menu_Service.create_Prato_Menu_Service(name, description, price, user_ID_lanchonete);
 
             if(create.err){
 
                 return Response.status(500).json(create.err);
             }
-
+ 
             return Response.status(200).json({ msg: create.msg})
 
         } catch (error) {

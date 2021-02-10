@@ -9,9 +9,7 @@ module.exports = {
             
             const menu = await menu_Service.get_Menu_Service();
 
-
             return Response.status(200).json(menu);
-
         } catch (error) {
             
             console.log(error);
