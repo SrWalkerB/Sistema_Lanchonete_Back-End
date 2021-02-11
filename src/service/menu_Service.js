@@ -37,9 +37,13 @@ module.exports = {
         return { msg: "Prato Criado!" }
     },
 
-    update_Prato_Menu_Service: async(id_lanchonete, id_product, name, description, price) => {
+    update_Prato_Menu_Service: async(id_product, name, description, price, token) => {
 
-        const update = await menu_Data.update_prato_DB(id_lanchonete, id_product, name, description, price);
+        const data_Token = verificaToken(token);
+        const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
+        const user_ID_lanchonete = user_Data[0].id_lanchonete;
+
+        const update = await menu_Data.update_prato_DB(user_ID_lanchonete, id_product, name, description, price);
 
         if(update <= 0){
 
@@ -49,9 +53,13 @@ module.exports = {
         return { msg: "Produto Alterado" };
     },
 
-    delete_Prato_Menu_Service: async (id_lanchonete, id_products) => {
+    delete_Prato_Menu_Service: async (id_products, token) => {
 
-        const del = await menu_Data.delete_prato_DB(id_lanchonete, id_products);
+        const data_Token = verificaToken(token);
+        const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
+        const user_ID_lanchonete = user_Data[0].id_lanchonete;
+
+        const del = await menu_Data.delete_prato_DB(user_ID_lanchonete, id_products);
 
         if(del <= 0){
 
