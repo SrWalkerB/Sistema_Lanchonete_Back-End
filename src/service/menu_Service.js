@@ -1,11 +1,17 @@
-const menu_Data = require("../data/menu_Data")
+const menu_Data = require("../data/menu_Data");
+const { verificaToken } = require("../utils/gerenciarToken");
+const users_Service = require("./users_Service");
+
 
 
 module.exports = {
 
-    get_Menu_Service: async () => {
+    get_Menu_Service: async (token) => {
 
-        const menu = await menu_Data.list_menu_DB();
+        const decoded = verificaToken(token);
+        const userData = await users_Service.seacher_User_Service(decoded.id_user);
+        const user_ID_lanchonete = userData[0].id_lanchonete;
+        const menu = await menu_Data.list_menu_DB(user_ID_lanchonete);
 
         if(menu == ""){
 
@@ -15,9 +21,13 @@ module.exports = {
         return menu
     },
 
-    create_Prato_Menu_Service: async (name, description, price, id_lanchonete) => {
+    create_Prato_Menu_Service: async (name, description, price, token) => {
 
-        const create = await menu_Data.create_prato_DB(name, description, price, id_lanchonete);
+        const data_Token = verificaToken(token);
+        const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
+        const user_ID_lanchonete = user_Data[0].id_lanchonete;
+    
+        const create = await menu_Data.create_prato_DB(name, description, price, user_ID_lanchonete);
 
         if(create <= 0){
 

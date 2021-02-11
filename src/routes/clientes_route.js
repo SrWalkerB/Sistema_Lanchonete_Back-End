@@ -1,6 +1,7 @@
 
 const expres = require("express");
 const cliente_Controllers = require("../Controllers/cliente_Controllers");
+const { Autenticao } = require("./middlewares/autenticao");
 
 const cliente_route = expres.Router();
 

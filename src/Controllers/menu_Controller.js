@@ -6,8 +6,9 @@ module.exports = {
     list_Menu: async (Request, Response) => {
 
         try {
-            
-            const menu = await menu_Service.get_Menu_Service();
+            const token = Request.header("Token");
+
+            const menu = await menu_Service.get_Menu_Service(token);
 
             return Response.status(200).json(menu);
         } catch (error) {

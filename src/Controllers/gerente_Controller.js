@@ -20,13 +20,8 @@ module.exports = {
         try {
 
             const token = Request.header("Token");
-            const data_Token = verificaToken(token);
-
-            const user_Data = await users_Service.seacher_User_Service(data_Token.id_user);
-            const user_ID_lanchonete = user_Data[0].id_lanchonete;
-    
             const { name, description, price } = Request.body;
-            const create = await menu_Service.create_Prato_Menu_Service(name, description, price, user_ID_lanchonete);
+            const create = await menu_Service.create_Prato_Menu_Service(name, description, price, token);
 
             if(create.err){
 

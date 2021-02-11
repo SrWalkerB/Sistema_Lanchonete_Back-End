@@ -4,9 +4,10 @@ const db_Actions = require("../infra/config/db_Config")
 
 module.exports = {
 
-    list_menu_DB: async () => {
+    list_menu_DB: async (id_lanchonete) => {
 
-        return await db_Actions("tb_menu");
+        return await db_Actions("tb_menu")
+        .where("id_lanchonete", id_lanchonete);
     },
 
     create_prato_DB: async (name, description, price, id_lanchonete) => {
