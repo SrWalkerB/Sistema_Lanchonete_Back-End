@@ -46,5 +46,26 @@ module.exports = {
             console.log(error);
             return Response.status(500).json({ err: error });
         }
+    },
+
+    my_Data_Account: async (Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const user_Data = await clientes_Service.seacher_Cliente_ID_Service(token);
+
+            if(user_Data.err){
+
+                return Response.status(404).json({ err: user_Data.err });
+            }
+
+            return Response.status(200).json(user_Data.msg);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
     }
 }

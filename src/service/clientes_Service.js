@@ -53,5 +53,34 @@ module.exports = {
         return { msg : "Cadastro Concluido" }
     },
 
+    seacher_Cliente_ID_Service: async(token) => {
+
+        const decoded = verificaToken(token);
+        const user_Data = await clientes_Data.seacher_Cliente_DB(decoded.id_user);
+        const user_mail = await users_Service.seacher_User_Service(decoded.id_user);
+        const lanchonete = await lanchonete_Service.seacher_Lanchonete_ID_Service(user_Data[0].id_lanchonete);
+        let data_Formatado = [];
+
+        if(user_Data == ""){
+
+            return { err: "Client não encontrado"};
+        }
+
+        user_Data.map(result => {
+
+            data_Formatado.push({
+
+                "id": result.id_cliente,
+                "lanchonete": lanchonete[0].nome_empresarial,
+                "name": result.name,
+                "surname": result.surname,
+                "email": user_mail[0].email
+            })
+        })
+
+
+        return { msg: data_Formatado };
+    }
+
 
 }

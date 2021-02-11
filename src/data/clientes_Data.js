@@ -27,5 +27,11 @@ module.exports = {
 
         return await db_Actions('tb_clientes')
         .where("email", email);
+    },
+
+    seacher_Cliente_DB: async (id) => {
+
+        return db_Actions("tb_clientes")
+        .where("id_cliente", id);
     }
 }
