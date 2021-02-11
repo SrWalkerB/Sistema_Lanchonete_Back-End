@@ -1,5 +1,6 @@
 const clientes_Data = require("../data/clientes_Data");
 const cryptografarDados = require("../utils/cryptografarDados");
+const { verificaToken } = require("../utils/gerenciarToken");
 const lanchonete_Service = require("./lanchonete_Service");
 const users_Service = require("./users_Service");
 
@@ -8,10 +9,13 @@ const users_Service = require("./users_Service");
 
 module.exports = {
 
-    list_Cliente_Service: async () => {
+    list_Cliente_Service: async (token) => {
 
-        const clients = await clientes_Data.list_clients_DB();
+        const decoded = verificaToken(token);
+        const userData = await users_Service.seacher_User_Service(decoded.id_user);
+        const userLanchoenteID = userData[0].id_user;
 
+        const clients = await clientes_Data.list_clients_DB(userLanchoenteID);
 
         if(clients == ""){
 

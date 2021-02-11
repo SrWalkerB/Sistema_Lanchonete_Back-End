@@ -13,8 +13,6 @@ module.exports = {
             return Response.status(403).json({ err: verificaToken.err });
         }
 
-        console.log(verificaToken)
-
         done();
     }
 }

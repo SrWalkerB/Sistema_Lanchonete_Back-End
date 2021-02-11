@@ -8,8 +8,9 @@ module.exports = {
 
     list_Clientes_Cadastrados: async(Request, Response) => {
 
-        const clients = await clientes_Service.list_Cliente_Service();
+        const token = Request.header("Token");
 
+        const clients = await clientes_Service.list_Cliente_Service(token);
 
         return Response.status(200).json(clients);
     },
