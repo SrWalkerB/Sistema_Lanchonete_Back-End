@@ -38,5 +38,12 @@ module.exports = {
         .where("id_lanchonete", id_lanchonete)
         .where("id_products", id_products)
         .delete();        
+    },
+
+    seacher_prato_ID_DB: async(id_lanchonete, id_product) => {
+
+        return await db_Actions("tb_menu")
+        .where("id_lanchonete", id_lanchonete)
+        .where("id_products", id_product);
     }
 }

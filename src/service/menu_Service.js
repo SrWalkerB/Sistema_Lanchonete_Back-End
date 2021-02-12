@@ -67,5 +67,17 @@ module.exports = {
         }
 
         return { msg : "Prato deletado!" }
+    },
+
+    seacher_Prato_Menu_ID_Service: async(id_lanchonete, id_product) => {
+
+        const product = await menu_Data.seacher_prato_ID_DB(id_lanchonete, id_product);
+
+        if(product <= 0){
+
+            return { err: "Produto não encontrado" };
+        }
+
+        return product;
     }
 }

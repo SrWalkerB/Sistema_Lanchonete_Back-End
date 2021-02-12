@@ -1,6 +1,9 @@
+const moment = require("moment");
 const pedidos_Data = require("../data/pedidos_Data");
 const { verificaToken } = require("../utils/gerenciarToken");
+const clientes_Service = require("./clientes_Service");
 const lanchonete_Service = require("./lanchonete_Service");
+const menu_Service = require("./menu_Service");
 const users_Service = require("./users_Service");
 
 
@@ -12,18 +15,39 @@ module.exports = {
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
         const id_lanchonete = userData[0].id_lanchonete;
         const lanchoneteData = await lanchonete_Service.seacher_Lanchonete_ID_Service(id_lanchonete);
+        const pedidos = await pedidos_Data.list_pedidos_DB(id_lanchonete);
+        let pedidosFormatados = [];
 
-        console.log(id_lanchonete);
-        console.log(lanchoneteData);
-        //Carregar a lanchonete
 
-        //Pegar os dados tabela pedidos
+        for(let x = 0; x < pedidos.length; x++){
+            
+            moment.locale("pt-br")
+
+            const data_formatada = moment(pedidos[x].created_at).format("LLLL")
+            const prato_name = await menu_Service.seacher_Prato_Menu_ID_Service(id_lanchonete, pedidos[x].id_prato);
+            const client = await clientes_Service.seacher_Client_ID_Service(pedidos[x].id_cliente);
+
+
+            console.log(client);
+
+            pedidosFormatados.push({
+
+                "lanchonete": lanchoneteData[0].nome_empresarial,
+                "id_pedido": pedidos[x].id_pedido,
+                "id_prato": pedidos[x].id_prato,
+                "prato": prato_name[0].name,
+                "id_cliente": pedidos[x].id_cliente,
+                "client": `${client[0].name} ${client[0].surname}`,
+                "data": data_formatada
+            })
+        }
+
 
         //Consultar os dados da tabela pedidos para retornar o produto e o cliente
 
         //Devolver os dados
 
-        return token;
+        return pedidosFormatados;
     },
 
     create_pedidos_Service: async(id_lanchonete, id_product, id_cliente) => {

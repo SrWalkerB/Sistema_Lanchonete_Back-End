@@ -53,7 +53,7 @@ module.exports = {
         return { msg : "Cadastro Concluido" }
     },
 
-    seacher_Cliente_ID_Service: async(token) => {
+    seacher_Cliente_Token_Service: async(token) => {
 
         const decoded = verificaToken(token);
         const user_Data = await clientes_Data.seacher_Cliente_DB(decoded.id_user);
@@ -80,6 +80,18 @@ module.exports = {
 
 
         return { msg: data_Formatado };
+    },
+
+    seacher_Client_ID_Service: async(id) => {
+
+        const client = await clientes_Data.seacher_Cliente_DB(id);
+
+        if(client < 0){
+
+            return { err: "Nenhum Cliente encontrado" };
+        }
+
+        return client;
     }
 
 

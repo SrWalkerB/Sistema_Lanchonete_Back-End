@@ -31,7 +31,7 @@ module.exports = {
         try {
             
             const token = Request.header("Token");
-            const user_Data = await clientes_Service.seacher_Cliente_ID_Service(token);
+            const user_Data = await clientes_Service.seacher_Cliente_Token_Service(token);
 
             if(user_Data.err){
 
