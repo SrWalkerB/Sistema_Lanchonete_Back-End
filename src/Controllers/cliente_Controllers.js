@@ -1,4 +1,5 @@
 const clientes_Service = require("../service/clientes_Service");
+const pedidos_Service = require("../service/pedidos_Service");
 
 
 module.exports = { 
@@ -45,5 +46,30 @@ module.exports = {
             console.log(error);
             return Response.status(500).json({ err: error });
         }
+    },
+
+    create_Pedido: async(Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const { id_produto } = Request.body;
+
+            const pedido = await pedidos_Service.create_pedidos_Service(id_produto, token);
+
+            if(pedido.err){
+
+                return Response.status(404).json({ err: pedido.err });
+            }
+            
+
+            return Response.status(200).json(pedido)
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
     }
+    
 }

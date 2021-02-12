@@ -18,7 +18,6 @@ module.exports = {
         const pedidos = await pedidos_Data.list_pedidos_DB(id_lanchonete);
         let pedidosFormatados = [];
 
-
         for(let x = 0; x < pedidos.length; x++){
             
             moment.locale("pt-br")
@@ -26,9 +25,6 @@ module.exports = {
             const data_formatada = moment(pedidos[x].created_at).format("LLLL")
             const prato_name = await menu_Service.seacher_Prato_Menu_ID_Service(id_lanchonete, pedidos[x].id_prato);
             const client = await clientes_Service.seacher_Client_ID_Service(pedidos[x].id_cliente);
-
-
-            console.log(client);
 
             pedidosFormatados.push({
 
@@ -42,23 +38,37 @@ module.exports = {
             })
         }
 
-
-        //Consultar os dados da tabela pedidos para retornar o produto e o cliente
-
-        //Devolver os dados
-
         return pedidosFormatados;
     },
 
-    create_pedidos_Service: async(id_lanchonete, id_product, id_cliente) => {
+    create_pedidos_Service: async(id_produto, token) => {
 
-        const create_pedido = await pedidos_Data.create_pedidos_DB(id_lanchonete, id_product, id_cliente);
+        const decoded = verificaToken(token);
+        const userData = await users_Service.seacher_User_Service(decoded.id_user);
+        const id_lanchonete = userData[0].id_lanchonete;
+        const seacherProduto = await menu_Service.seacher_Prato_Menu_ID_Service(id_lanchonete, id_produto);
+        const id_product = seacherProduto[0].id_products;
+
+
+        if(seacherProduto.err){
+
+            return { err : seacherProduto.err };
+        }
+
+
+        console.log(userData);
+        console.log(id_lanchonete);
+        console.log(seacherProduto);
+
+
+        const create_pedido = await pedidos_Data.create_pedidos_DB(id_lanchonete, id_product, decoded.id_user);
 
         if(create_pedido <= 0){
 
             return { err: "Ocorreu um erro, Tente novamente" };
         } 
         
-        return { msg: create_pedido };
+        return { msg: "Pedido feito!" }; 
+        
     }
 }
