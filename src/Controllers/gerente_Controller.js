@@ -1,7 +1,6 @@
 const clientes_Service = require("../service/clientes_Service");
 const menu_Service = require("../service/menu_Service");
-const users_Service = require("../service/users_Service");
-const { verificaToken } = require("../utils/gerenciarToken");
+const pedidos_Service = require("../service/pedidos_Service");
 
 
 module.exports = { 
@@ -15,6 +14,23 @@ module.exports = {
         return Response.status(200).json(clients);
     },
 
+    list_Pedidos: async (Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const pedidos = await pedidos_Service.get_Pedidos_Service(token)
+
+
+            return Response.status(200).json(pedidos);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+ 
     create_Pratos_Menu: async(Request, Response) => {
 
         try {

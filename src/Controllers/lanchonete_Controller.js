@@ -1,4 +1,3 @@
-const info_lanchonete_Data = require("../data/info_lanchonete_Data");
 const lanchonete_Service = require("../service/lanchonete_Service");
 
 
