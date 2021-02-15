@@ -11,12 +11,14 @@ module.exports = {
 
     create_pedidos_DB: async(id_lanchonete, id_product, id_cliente) => {
 
+        //Status automaticamente insere "pendente"
         return db_Actions("tb_pedidos")
         .insert({
             
             id_lanchonete: id_lanchonete,
             id_prato: id_product,
-            id_cliente: id_cliente
+            id_cliente: id_cliente,
+            status: "pendente"
         })
     }
 

@@ -34,7 +34,8 @@ module.exports = {
                 "prato": prato_name[0].name,
                 "id_cliente": pedidos[x].id_cliente,
                 "client": `${client[0].name} ${client[0].surname}`,
-                "data": data_formatada
+                "data": data_formatada,
+                "status": pedidos[x].status
             })
         }
 
@@ -54,12 +55,6 @@ module.exports = {
 
             return { err : seacherProduto.err };
         }
-
-
-        console.log(userData);
-        console.log(id_lanchonete);
-        console.log(seacherProduto);
-
 
         const create_pedido = await pedidos_Data.create_pedidos_DB(id_lanchonete, id_product, decoded.id_user);
 

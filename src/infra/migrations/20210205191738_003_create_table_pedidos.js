@@ -12,6 +12,7 @@ exports.up = function(knex) {
 
         table.integer('id_prato').notNullable()
         table.integer('id_cliente').notNullable();
+        table.string("status").notNullable();
 
         table.timestamp("created_at").defaultTo(db_Actions.fn.now()).notNullable();
     })
@@ -19,5 +20,5 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   
-    return db_Actions.schema.dropTableIfExists("tb_tb_pedidos")
+    return db_Actions.schema.dropTableIfExists("tb_pedidos")
 };
