@@ -1,4 +1,5 @@
 const clientes_Service = require("../service/clientes_Service");
+const funcionarios_Service = require("../service/funcionarios_Service");
 const menu_Service = require("../service/menu_Service");
 const pedidos_Service = require("../service/pedidos_Service");
 
@@ -98,6 +99,30 @@ module.exports = {
             }
 
             return Response.status(200).json({ msg : del.msg});
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+
+    create_Funcionarios: async(Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const { name, surname, email, password } = Request.body; 
+            
+            const create_Funcionarios = await funcionarios_Service.create_Funcionarios_Service(name, surname, email, password, token);
+
+            if(create_Funcionarios.err){
+
+                return Response.status(404).json({ err: create_Funcionarios.err });
+            }
+
+
+            return Response.status(200).json({ msg: create_Funcionarios.msg });
 
         } catch (error) {
             
