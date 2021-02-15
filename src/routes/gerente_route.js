@@ -17,6 +17,8 @@ gerente_route.put("/menu/:id_product", Autenticao, Autorizacao_ADM, gerente_Cont
 
 gerente_route.delete("/menu/del/:id",Autenticao, Autorizacao_ADM, gerente_Controller.delete_Pratos_Menu);
 
+gerente_route.get("/funcionarios", Autenticao, Autorizacao_ADM, gerente_Controller.list_Funcionarios);
+
 gerente_route.post("/funcionarios", Autenticao, Autorizacao_ADM, gerente_Controller.create_Funcionarios);
 
 

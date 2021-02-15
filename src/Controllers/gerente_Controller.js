@@ -107,6 +107,22 @@ module.exports = {
         }
     },
 
+    list_Funcionarios: async(Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const dados = await funcionarios_Service.list_Funcionarios_Service(token);
+
+            return Response.status(200).json(dados);
+            
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+
     create_Funcionarios: async(Request, Response) => {
 
         try {

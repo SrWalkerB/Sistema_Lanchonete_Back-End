@@ -8,6 +8,22 @@ const users_Service = require("./users_Service");
 
 module.exports = {
 
+    list_Funcionarios_Service: async(token) => {
+
+        const decoded = verificaToken(token);
+        const user_ID = decoded.id_user;
+        const user_Dados = await users_Service.seacher_User_Service(user_ID);
+        const id_lanchonete = user_Dados[0].id_lanchonete;
+        const funcionarios_list = await funcionaros_Data.list_Funcionarios_DB(id_lanchonete);
+
+        if(funcionarios_list == ""){
+
+            return { msg: "Nenhum funcionario cadastrado" }
+        }
+
+        return funcionarios_list;
+    },
+
     create_Funcionarios_Service: async (name, surname, email, password, token) => {
 
         const verifica_Token = verificaToken(token);
