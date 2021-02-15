@@ -1,4 +1,5 @@
-const clientes_Service = require("../service/clientes_Service")
+const clientes_Service = require("../service/clientes_Service");
+const pedidos_Service = require("../service/pedidos_Service");
 
 
 module.exports = {
@@ -18,5 +19,21 @@ module.exports = {
             return Response.status(500).json({ err: error });
         }
 
-    }
+    },
+
+    list_Pedidos: async (Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const pedidos = await pedidos_Service.get_Pedidos_Service(token)
+
+            return Response.status(200).json(pedidos);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
 }

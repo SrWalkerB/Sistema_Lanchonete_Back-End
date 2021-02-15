@@ -10,6 +10,8 @@ const funcionario_route = express.Router();
 
 funcionario_route.get("/clientes", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.list_clientes);
 
+funcionario_route.get("/pedidos", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.list_Pedidos);
+
 
 
 module.exports = funcionario_route;
