@@ -13,7 +13,7 @@ module.exports = {
 
         const decoded = verificaToken(token);
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
-        const userLanchoenteID = userData[0].id_user;
+        const userLanchoenteID = userData[0].id_lanchonete;
 
         const clients = await clientes_Data.list_clients_DB(userLanchoenteID);
 
@@ -21,6 +21,7 @@ module.exports = {
 
             return { msg: "Nenhum cliente cadastrado" }
         }
+
 
         return clients
     },

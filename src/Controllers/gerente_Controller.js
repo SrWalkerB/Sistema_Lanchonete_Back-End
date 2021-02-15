@@ -6,15 +6,6 @@ const pedidos_Service = require("../service/pedidos_Service");
 
 module.exports = { 
 
-    list_Clientes_Cadastrados: async(Request, Response) => {
-
-        const token = Request.header("Token");
-
-        const clients = await clientes_Service.list_Cliente_Service(token);
-
-        return Response.status(200).json(clients);
-    },
-
     list_Pedidos: async (Request, Response) => {
 
         try {
@@ -115,7 +106,7 @@ module.exports = {
             const dados = await funcionarios_Service.list_Funcionarios_Service(token);
 
             return Response.status(200).json(dados);
-            
+
         } catch (error) {
             
             console.log(error);
