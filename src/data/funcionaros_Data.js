@@ -20,5 +20,12 @@ module.exports = {
             surname: surname,
             type: type
         })
+    },
+
+    seacher_Funcionario_ID: async(id_lanchonete, id_user) => {
+
+        return db_Actions('tb_funcionarios')
+        .where("id_lanchonete", id_lanchonete)
+        .where("id_funcionario", id_user);
     }
 }

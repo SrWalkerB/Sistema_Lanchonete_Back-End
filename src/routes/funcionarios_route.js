@@ -12,6 +12,8 @@ funcionario_route.get("/clientes", Autenticao, Autorizacao_Funcionario, funciona
 
 funcionario_route.get("/pedidos", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.list_Pedidos);
 
+funcionario_route.get("/funcionarios/my", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.MyData);
+
 
 
 module.exports = funcionario_route;

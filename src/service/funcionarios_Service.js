@@ -1,6 +1,7 @@
 const funcionaros_Data = require("../data/funcionaros_Data");
 const cryptografarDados = require("../utils/cryptografarDados");
 const { verificaToken } = require("../utils/gerenciarToken");
+const lanchonete_Service = require("./lanchonete_Service");
 const users_Service = require("./users_Service");
 
 
@@ -47,5 +48,29 @@ module.exports = {
         }
         
         return { msg: "Funcionario Cadastrado" };
+    },
+
+    my_Data_Service: async(token) => {
+
+        const decoded = verificaToken(token);
+        const user_ID = decoded.id_user;
+        const user_My_Data = await users_Service.seacher_User_Service(user_ID);
+        const lanchonete_ID = user_My_Data[0].id_lanchonete;
+        const lanchonete_Data = await lanchonete_Service.seacher_Lanchonete_ID_Service(lanchonete_ID);
+        const funcionarios_my_Data = await funcionaros_Data.seacher_Funcionario_ID(lanchonete_ID, user_ID);
+        let dados_Formatados = [];
+
+        dados_Formatados.push({
+
+            "lanchonete": lanchonete_Data[0].nome_empresarial,
+            "my_id": user_My_Data[0].id_user,
+            "name": funcionarios_my_Data[0].name,
+            "surname": funcionarios_my_Data[0].surname,
+            "email": user_My_Data[0].email,
+            "type": funcionarios_my_Data[0].type
+        })
+
+
+        return dados_Formatados;
     }
 }
