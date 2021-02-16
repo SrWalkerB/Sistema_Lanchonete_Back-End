@@ -48,8 +48,13 @@ module.exports = {
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
         const id_lanchonete = userData[0].id_lanchonete;
         const seacherProduto = await menu_Service.seacher_Prato_Menu_ID_Service(id_lanchonete, id_produto);
-        const id_product = seacherProduto[0].id_products;
 
+        if(seacherProduto.err){
+
+            return { err: seacherProduto.err }; 
+        }
+
+        const id_product = seacherProduto[0].id_products;
 
         if(seacherProduto.err){
 
