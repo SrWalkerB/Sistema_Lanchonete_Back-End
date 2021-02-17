@@ -9,7 +9,7 @@ const users_Service = require("./users_Service");
 
 module.exports = {
 
-    get_Pedidos_Service: async (token) => {
+    get_All_Pedidos_Service: async (token) => {
 
         const decoded = verificaToken(token);
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
@@ -70,5 +70,29 @@ module.exports = {
         
         return { msg: "Pedido feito!" }; 
         
+    },
+
+    seacher_Pedido_ID_Service: async(id_lanchonete, id_pedido) => {
+
+        const result = await pedidos_Data.list_Pedido_ID_DB(id_lanchonete, id_pedido);
+
+        if(result == ""){
+            
+            return { err: "Pedido não encontrado" }
+        }
+
+        return result;
+    },
+
+    update_Pedido_ID_Service: async(id_lanchonete, id_pedido, status) => {
+
+        const update_data = await pedidos_Data.update_Pedido_ID_DB(id_lanchonete, id_pedido, status);
+
+        if(update_data <= 0){
+
+            return { err: "Ocorreu um erro, tente mais tarde" }
+        }
+
+        return update_data;
     }
 }

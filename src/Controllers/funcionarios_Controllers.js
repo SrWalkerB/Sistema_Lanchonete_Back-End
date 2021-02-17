@@ -27,7 +27,7 @@ module.exports = {
         try {
             
             const token = Request.header("Token");
-            const pedidos = await pedidos_Service.get_Pedidos_Service(token)
+            const pedidos = await pedidos_Service.get_All_Pedidos_Service(token)
 
             return Response.status(200).json(pedidos);
 
@@ -47,6 +47,30 @@ module.exports = {
             const dados = await funcionarios_Service.my_Data_Service(token);
 
             return Response.status(200).json(dados);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+
+    status_Pedidos: async(Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+            const { id_pedido } = Request.params;
+            const { status } = Request.body;
+            
+            const result = await funcionarios_Service.status_Pedidos_Service(id_pedido, status, token);
+
+            if(result.err){
+
+                return Response.status(404).json({ err: result.err });
+            }
+
+            return Response.status(200).json(result); 
 
         } catch (error) {
             

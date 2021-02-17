@@ -19,8 +19,6 @@ gerente_route.post("/funcionarios", Autenticao, Autorizacao_ADM, gerente_Control
 
 
 
-
-
 module.exports = gerente_route;
 
 
