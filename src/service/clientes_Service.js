@@ -44,7 +44,7 @@ module.exports = {
         const typeClient = "USER";
         const password_cryptografado = cryptografarDados.cryptografarDados(password);
         const client_ID = await clientes_Data.create_Clients_DB(name, surname, id_lanchonete);
-        const create_User = await users_Service.create_User_Service(client_ID, id_lanchonete, email, password_cryptografado, typeClient);
+        const create_User = await users_Service.create_User_Service(id_lanchonete, email, password_cryptografado, typeClient);
         
         if(client_ID < 0 || create_User < 0){
 

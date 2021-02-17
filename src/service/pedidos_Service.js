@@ -1,6 +1,7 @@
 const moment = require("moment");
 const pedidos_Data = require("../data/pedidos_Data");
 const { verificaToken } = require("../utils/gerenciarToken");
+const Send_Mail_Recibo = require("../utils/sendMail");
 const clientes_Service = require("./clientes_Service");
 const lanchonete_Service = require("./lanchonete_Service");
 const menu_Service = require("./menu_Service");
@@ -47,6 +48,7 @@ module.exports = {
         const decoded = verificaToken(token);
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
         const id_lanchonete = userData[0].id_lanchonete;
+        const lanchonete_info = await lanchonete_Service.seacher_Lanchonete_ID_Service(id_lanchonete);
         const seacherProduto = await menu_Service.seacher_Prato_Menu_ID_Service(id_lanchonete, id_produto);
 
         if(seacherProduto.err){
@@ -66,10 +68,17 @@ module.exports = {
         if(create_pedido <= 0){
 
             return { err: "Ocorreu um erro, Tente novamente" };
-        } 
+        }  
         
+        
+        //Criando recibo e enviando email
+        const name_lanchonete = lanchonete_info[0].nome_empresarial;
+        const email_user = userData[0].email;
+        const produto_send = seacherProduto[0].name;
+        const description_send = seacherProduto[0].description;
+        const recibo_mail = await Send_Mail_Recibo(name_lanchonete, email_user, produto_send, description_send);
+
         return { msg: "Pedido feito!" }; 
-        
     },
 
     seacher_Pedido_ID_Service: async(id_lanchonete, id_pedido) => {
