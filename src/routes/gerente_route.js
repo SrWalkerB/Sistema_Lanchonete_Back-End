@@ -15,8 +15,6 @@ gerente_route.delete("/menu/del/:id",Autenticao, Autorizacao_ADM, gerente_Contro
 
 gerente_route.get("/funcionarios", Autenticao, Autorizacao_ADM, gerente_Controller.list_Funcionarios);
 
-gerente_route.get("/gerente/my", Autenticao, Autorizacao_ADM, gerente_Controller.my_Dados_Gerente);
-
 gerente_route.post("/funcionarios", Autenticao, Autorizacao_ADM, gerente_Controller.create_Funcionarios);
 
 
