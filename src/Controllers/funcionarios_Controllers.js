@@ -38,6 +38,29 @@ module.exports = {
         }
     },
 
+    list_Pedidos_Status: async(Request, Response) => {
+        
+        try {
+            
+            const token = Request.header("Token");
+            const { status } = Request.body;
+
+            const result = await pedidos_Service.list_Pedidos_Status_Service(token, status);
+
+            if(result.err){
+
+                return Response.status(404).json({ err: result.err });
+            }
+
+            return Response.status(200).json(result);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+
     MyData: async (Request, Response) => {
 
         try {

@@ -43,6 +43,44 @@ module.exports = {
         return pedidosFormatados;
     },
 
+    list_Pedidos_Status_Service: async(token, status) => {
+
+        const decoded = verificaToken(token);
+        const user_Data = await users_Service.seacher_User_Service(decoded.id_user);
+        const lanchonete_ID = user_Data[0].id_lanchonete;
+        const seacher_pedidos = await pedidos_Data.list_Pedido_Status(lanchonete_ID, status);
+        let dados_formatado = [];
+
+        if(seacher_pedidos == ""){
+
+            return { err: "Não foi encontrado nenhum registro" };
+        }
+
+        for(let x = 0; x < seacher_pedidos.length; x++){
+
+            const prato_dados = await menu_Service.seacher_Prato_Menu_ID_Service(lanchonete_ID, seacher_pedidos[x].id_prato);
+            const client_dados = await clientes_Service.seacher_Client_ID_Service(seacher_pedidos[x].id_cliente);
+
+            moment.locale("pt-br");
+            const data_formatada = moment(seacher_pedidos[x].created_at).format("LLL");
+ 
+            dados_formatado.push({
+
+                id_pedido: seacher_pedidos[x].id_pedido,
+                id_prato: seacher_pedidos[x].id_prato,
+                prato: prato_dados[0].name,
+                description: prato_dados[0].description,
+                price: prato_dados[0].price,
+                name: client_dados[0].name,
+                surname: client_dados[0].surname,
+                status: seacher_pedidos[x].status,
+                data_pedido: data_formatada
+            })
+        }
+        
+        return dados_formatado;
+    },
+
     create_pedidos_Service: async(id_produto, token) => {
 
         const decoded = verificaToken(token);

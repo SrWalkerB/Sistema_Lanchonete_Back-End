@@ -29,6 +29,13 @@ module.exports = {
         .where("id_pedido", id_pedido);
     },
 
+    list_Pedido_Status: async(id_lanchonete, status) => {
+
+        return db_Actions("tb_pedidos")
+        .where('id_lanchonete', id_lanchonete)
+        .where("status", status);
+    },
+
     update_Pedido_ID_DB: async(id_lanchonete, id_pedido, status) => {
 
         return await db_Actions("tb_pedidos")
