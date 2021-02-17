@@ -15,6 +15,7 @@ funcionario_route.post("/pedidos/status", Autenticao, Autorizacao_Funcionario, f
 
 funcionario_route.post("/pedidos/:id_pedido", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.status_Pedidos);
 
+funcionario_route.get("/funcionarios/my", Autenticao, Autorizacao_Funcionario, funcionarios_Controllers.MyData);
 
 
 

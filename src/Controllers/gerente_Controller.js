@@ -119,20 +119,5 @@ module.exports = {
             console.log(error);
             return Response.status(500).json({ err: error });
         }
-    },
-
-    my_Dados_Gerente: async (Request, Response) => {
-
-        try {
-            
-            const token = Request.header("Token");
-
-            return Response.status(200).json(token);
-
-        } catch (error) {
-            
-            console.log(error);
-            return Response.status(500).json({ err: error });
-        }
     }
 }

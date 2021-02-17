@@ -61,6 +61,23 @@ module.exports = {
         }
     },
 
+    MyData: async (Request, Response) => {
+
+        try {
+            
+            const token = Request.header("Token");
+
+            const dados = await funcionarios_Service.my_Data_Service(token);
+
+            return Response.status(200).json(dados);
+
+        } catch (error) {
+            
+            console.log(error);
+            return Response.status(500).json({ err: error });
+        }
+    },
+
     status_Pedidos: async(Request, Response) => {
 
         try {
