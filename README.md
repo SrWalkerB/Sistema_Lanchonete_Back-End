@@ -57,7 +57,7 @@ npm start
 
 ### Usuário "cliente"
 
-#### Esse é o usuário com mesmo privilégios, com ele é possível criar conta, visualizar cadastro e realizar pedidos.
+#### Esse é o usuário com menos privilégios, com ele é possível criar conta, visualizar cadastro e realizar pedidos.
 
 ## Tecnologias
 
