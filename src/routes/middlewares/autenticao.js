@@ -8,11 +8,8 @@ module.exports = {
         const token = Request.header("Token");
         const verificaToken = gerenciarToken.verificaToken(token);
 
-        if(verificaToken.err){
-
-            return Response.status(403).json({ err: verificaToken.err });
-        }
-
+        if(verificaToken.err) return Response.status(403).json({ err: verificaToken.err });
+        
         done();
     }
 }

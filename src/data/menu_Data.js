@@ -10,10 +10,9 @@ module.exports = {
         .where("id_lanchonete", id_lanchonete);
     },
 
-    create_prato_DB: async (name, description, price, id_lanchonete) => {
-
+    create_prato_DB: async (name, description, price, id_lanchonete, id_Product) => {
         return await db_Actions("tb_menu").insert({
-
+            id_products: id_Product,
             name: name,
             description: description,
             price: price,

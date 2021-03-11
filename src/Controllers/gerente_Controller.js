@@ -14,10 +14,7 @@ module.exports = {
             const { name, description, price } = Request.body;
             const create = await menu_Service.create_Prato_Menu_Service(name, description, price, token);
 
-            if(create.err){
-
-                return Response.status(500).json(create.err);
-            }
+            if(create.err) return Response.status(500).json(create.err);
  
             return Response.status(200).json({ msg: create.msg})
 
@@ -67,11 +64,8 @@ module.exports = {
 
             const del = await menu_Service.delete_Prato_Menu_Service(id, token);
 
-            if(del.err){
-
-                return Response.status(200).json({ err : del.err});
-            }
-
+            if(del.err) return Response.status(404).json({ err : del.err});
+            
             return Response.status(200).json({ msg : del.msg});
 
         } catch (error) {

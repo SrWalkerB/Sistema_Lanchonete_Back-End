@@ -5,8 +5,7 @@ module.exports = {
 
     gerarToken: (dado) => {
 
-        const token = jwt.sign({ id_user: dado }, process.env.KEY, { expiresIn: "30m" });
-
+        const token = jwt.sign({ id_user: dado }, process.env.KEY, { expiresIn: "60m" });
         return token;
     },
 
@@ -14,10 +13,7 @@ module.exports = {
 
         const decoded = jwt.verify(token, process.env.KEY, (err, decoded) => {
 
-            if(err){
-
-                return { err: "Token inválido" };
-            }
+            if(err) return { err: "Token inválido" };
 
             return decoded;
         })

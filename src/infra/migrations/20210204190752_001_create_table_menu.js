@@ -6,9 +6,8 @@ exports.up = function(knex) {
   
     return db_Actions.schema.createTableIfNotExists("tb_menu", table => {
 
-        table.integer("id_lanchonete").notNullable();
-
-        table.increments("id_products").notNullable();
+        table.string("id_lanchonete").notNullable();
+        table.string("id_products").notNullable();
         table.string("name").notNullable();
         table.string("description");
         table.float("price").notNullable();

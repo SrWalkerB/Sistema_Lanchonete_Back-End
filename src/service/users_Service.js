@@ -21,10 +21,7 @@ module.exports = {
 
         const result = await users_Data.seacher_User_DB(id_user);
 
-        if(result == ""){
-
-            return { err: "Usuário não encontrado" };
-        }
+        if(result == "") return { err: "Usuário não encontrado" };
 
         return result;
     }
