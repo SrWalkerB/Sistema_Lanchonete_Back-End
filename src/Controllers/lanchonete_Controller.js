@@ -1,5 +1,4 @@
-const lanchonete_Service = require("../service/lanchonete_Service");
-
+const login_Service = require("../service/login_Service");
 
 
 module.exports = {
@@ -10,15 +9,11 @@ module.exports = {
             
             const { nome_empresarial, descricao, name, surname, email, password } = Request.body;
 
-            const create = await lanchonete_Service.create_Lanchonete_Service(nome_empresarial, descricao, name, surname, email, password);
+            const create = await login_Service.create_Account_Lanchonete_Service(nome_empresarial, descricao, name, surname, email, password);
 
-            if(create.err){
-
-                return Response.status(400).json({ err: create.err });
-            }
+            if(create.err) return Response.status(400).json({ err: create.err });
 
             return Response.status(201).json({ msg: create.msg });
-
         } catch (error) {
             
             console.log(error);

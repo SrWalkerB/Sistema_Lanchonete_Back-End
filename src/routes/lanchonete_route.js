@@ -9,8 +9,6 @@ const lanchonete_route = express.Router();
 
 lanchonete_route.get("/menu", Autenticao, menu_Controller.list_Menu);
 
-lanchonete_route.post("/create/lanchonete", lanchonete_Controller.create_Lanchonete);
-
 
 
 module.exports = lanchonete_route;

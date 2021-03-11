@@ -10,11 +10,10 @@ module.exports = {
         return db_Actions("tb_users").where("email", email);
     },
 
-    create_user_DB: async (id_lanchonete, email, password, type) => {
-
+    create_user_DB: async (id_lanchonete, id_user, email, password, type) => {
         return db_Actions("tb_users").insert({
-
             id_lanchonete: id_lanchonete,
+            id_user: id_user,
             email: email,
             password: password,
             type: type

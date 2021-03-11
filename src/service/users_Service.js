@@ -1,3 +1,4 @@
+const uuid = require("uuid");
 const users_Data = require("../data/users_Data")
 const db_Actions = require("../infra/config/db_Config")
 
@@ -12,7 +13,8 @@ module.exports = {
     
     create_User_Service: async (id_lanchonete, email, password, type) => {
 
-        return await users_Data.create_user_DB(id_lanchonete, email, password, type);
+        const id_ADM = uuid.v4();
+        return await users_Data.create_user_DB(id_lanchonete, id_ADM, email, password, type);
     },
 
     seacher_User_Service: async (id_user) => {

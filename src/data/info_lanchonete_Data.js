@@ -5,10 +5,10 @@ const funcionaros_Data = require("./funcionaros_Data")
 module.exports = {
 
 
-    create_lanchonete_DB: async (name_empresarial, descricao) => {
+    create_lanchonete_DB: async (id_lanchonete, name_empresarial, descricao) => {
 
         return await db_Actions("tb_info_lanchonete").insert({
-
+            id_lanchonete: id_lanchonete,
             nome_empresarial: name_empresarial,
             descricao: descricao
         })
