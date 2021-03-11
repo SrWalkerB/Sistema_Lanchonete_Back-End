@@ -15,9 +15,9 @@
 
 - [X] Cadastro de usuário ADMIN
 - [X] Cadastro de funcionários e clientes
-- [X] Cadastro de produtos
+- [X] Cadastro de produtos e realização de pedidos
 - [X] Envio de Recibos simples por email
-- [X] Autenticação e autorização
+- [X] Autenticação Autorização
 
 # Getting started
 
@@ -27,7 +27,7 @@
 npm install
 ```
 
-## Não esqueça de criar arquivo variaveis de ambiente na raiz do projeto
+## Criando variáveis de ambiente
 
 ```
 .env
@@ -45,15 +45,19 @@ npm start
 
 ## Como Usar
 
-#### Primeiro entre na pasta de rotas de login e crie suas respectivas rotas. Em Seguida crie uma conta, a partir dela e do token adm é possível ter acesso as próximas rotas.
+#### Primeiro entre na pasta de rotas de login e crie suas respectivas rotas. Em Seguida crie uma conta da sua lanchonete.
 
-### Usuário ADM
+### Usuário "ADM"
 
-#### Agora com ADM criado é possível criar suas respectivas congregações, entre nas rotas de ADM para criar suas rotas. Com ela crie primeiro a congregação e seguida crie um usuário para ela.
+#### Agora com a lanchonete criada e usuário ADM é possível criar produtos (criar, alterar, deletar) e funcionários.
 
-### User comum
+### Usuário "funcionário"
 
-#### Depois de criado um usuário com a rota ADM, realize login com user comum. Ele é o gerente da congregação atribuida, com ele é possível criar membros, gerenciar caixa e editar as informação da sua congregação responsável.
+#### Com usuário funcionário é possível: listar produtos, alterar o status de pedidos, listar clientes.
+
+### Usuário "cliente"
+
+#### Esse é o usuário com mesmo privilégios, com ele é possível criar conta, visualizar cadastro e realizar pedidos.
 
 ## Tecnologias
 
