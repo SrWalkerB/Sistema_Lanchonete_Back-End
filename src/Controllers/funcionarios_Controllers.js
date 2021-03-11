@@ -87,11 +87,8 @@ module.exports = {
             
             const result = await funcionarios_Service.status_Pedidos_Service(id_pedido, status, token);
 
-            if(result.err){
-
-                return Response.status(404).json({ err: result.err });
-            }
-
+            if(result.err) return Response.status(404).json({ err: result.err });
+            
             return Response.status(200).json(result); 
 
         } catch (error) {

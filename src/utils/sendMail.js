@@ -10,7 +10,7 @@ async function Send_Mail_Recibo(lanchonete_name, email_client, produto, descript
         port: 587,
         secure: false,
         auth: {
-            user: process.env.EMAIL,
+            user: process.env.EMAIL_MAIL,
             pass: process.env.PASSWORD_MAIL
         }
     })
@@ -31,10 +31,7 @@ async function Send_Mail_Recibo(lanchonete_name, email_client, produto, descript
 
     transporter.sendMail(mailOptions, (err, info) => {
 
-        if(err){
-
-            return { err: err };
-        }
+        if(err) return { err: err };
 
         return { msg: "Sent" }
     })
