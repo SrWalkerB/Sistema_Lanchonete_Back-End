@@ -9,7 +9,7 @@ const cliente_route = expres.Router();
 
 cliente_route.post("/cliente", cliente_Controllers.create_Account);
 
-cliente_route.post("/cliente/pedido", cliente_Controllers.create_Pedido);
+cliente_route.post("/cliente/pedido", Autenticao, cliente_Controllers.create_Pedido);
 
 cliente_route.get("/cliente/my", Autenticao, cliente_Controllers.my_Data_Account);
 

@@ -9,13 +9,13 @@ module.exports = {
         .where("id_lanchonete", id_lanchonete);
     },
 
-    create_pedidos_DB: async(id_lanchonete, id_product, id_cliente) => {
+    create_pedidos_DB: async(id_lanchonete, id_pedido, id_product, id_cliente) => {
 
         //Status automaticamente insere "pendente"
         return db_Actions("tb_pedidos")
         .insert({
-            
             id_lanchonete: id_lanchonete,
+            id_pedido: id_pedido,
             id_prato: id_product,
             id_cliente: id_cliente,
             status: "pendente"

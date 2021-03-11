@@ -12,10 +12,9 @@ module.exports = {
         .where("id_lanchonete", id_lanchonete);
     },
 
-    create_Clients_DB: async(name, surname, id_lanchonete) => {
-
+    create_Clients_DB: async(name, surname, id_client, id_lanchonete) => {
         return db_Actions("tb_clientes").insert({
-
+            id_cliente: id_client,
             id_lanchonete: id_lanchonete,
             name: name,
             surname: surname,

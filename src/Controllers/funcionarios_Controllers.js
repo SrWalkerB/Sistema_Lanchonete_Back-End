@@ -66,7 +66,6 @@ module.exports = {
         try {
             
             const token = Request.header("Token");
-
             const dados = await funcionarios_Service.my_Data_Service(token);
 
             return Response.status(200).json(dados);

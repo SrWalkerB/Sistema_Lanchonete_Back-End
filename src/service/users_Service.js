@@ -11,10 +11,9 @@ module.exports = {
         return await users_Data.seacher_Mail_User_DB(email);
     },
     
-    create_User_Service: async (id_lanchonete, email, password, type) => {
+    create_User_Service: async (id_lanchonete, id_user,email, password, type) => {
 
-        const id_ADM = uuid.v4();
-        return await users_Data.create_user_DB(id_lanchonete, id_ADM, email, password, type);
+        return await users_Data.create_user_DB(id_lanchonete, id_user, email, password, type);
     },
 
     seacher_User_Service: async (id_user) => {

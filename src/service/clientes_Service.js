@@ -1,3 +1,4 @@
+const uuid = require("uuid");
 const clientes_Data = require("../data/clientes_Data");
 const cryptografarDados = require("../utils/cryptografarDados");
 const { verificaToken } = require("../utils/gerenciarToken");
@@ -13,17 +14,13 @@ module.exports = {
 
         const decoded = verificaToken(token);
         const userData = await users_Service.seacher_User_Service(decoded.id_user);
-        const userLanchoenteID = userData[0].id_lanchonete;
+        const [{id_lanchonete}] = userData;
 
-        const clients = await clientes_Data.list_clients_DB(userLanchoenteID);
+        const clients = await clientes_Data.list_clients_DB(id_lanchonete);
 
-        if(clients == ""){
+        if(clients == "") return { msg: "Nenhum cliente cadastrado" }
 
-            return { msg: "Nenhum cliente cadastrado" }
-        }
-
-
-        return clients
+        return clients;
     },
 
     create_Cliente_Service: async (name, surname, email, password, id_lanchonete) => {
@@ -31,26 +28,16 @@ module.exports = {
         const seacher_mail = await users_Service.seacher_User_Mail_Service(email);
         const seacher_ID_Lanchonete = await lanchonete_Service.seacher_Lanchonete_ID_Service(id_lanchonete);
         
-        if(seacher_mail != ""){
+        if(seacher_mail != "") return { err : "Email já cadastrado" }
 
-            return { err : "Email já cadastrado" }
-        }
-
-        if(seacher_ID_Lanchonete == ""){
-
-            return { err: "Lanchoente não encontrada" };
-        }
+        if(seacher_ID_Lanchonete == "") return { err: "Lanchoente não encontrada" };
 
         const typeClient = "USER";
+        const id = uuid.v4();
         const password_cryptografado = cryptografarDados.cryptografarDados(password);
-        const client_ID = await clientes_Data.create_Clients_DB(name, surname, id_lanchonete);
-        const create_User = await users_Service.create_User_Service(id_lanchonete, email, password_cryptografado, typeClient);
-        
-        if(client_ID < 0 || create_User < 0){
-
-            return { err : "Ocorreu um erro, tente mais tarde" }
-        } 
-
+        await clientes_Data.create_Clients_DB(name, surname, id, id_lanchonete);
+        await users_Service.create_User_Service(id_lanchonete, id, email, password_cryptografado, typeClient);
+    
         return { msg : "Cadastro Concluido" }
     },
 

@@ -7,11 +7,10 @@ exports.up = function(knex) {
     
     return db_Actions.schema.createTableIfNotExists("tb_pedidos", table => {
 
-        table.integer('id_lanchonete').notNullable();
-        table.increments("id_pedido").notNullable();
-
-        table.integer('id_prato').notNullable()
-        table.integer('id_cliente').notNullable();
+        table.string('id_lanchonete').notNullable();
+        table.string("id_pedido").notNullable();
+        table.string('id_prato').notNullable()
+        table.string('id_cliente').notNullable();
         table.string("status").notNullable();
 
         table.timestamp("created_at").defaultTo(db_Actions.fn.now()).notNullable();
